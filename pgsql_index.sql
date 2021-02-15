@@ -5,6 +5,8 @@
 	Modified by:
 	Juan M. Banda 
 	juan@jmbanda.com
+	Zhao Zhengyang
+	tsingcheng1327@live.cn
 */
 
 CREATE INDEX X_MRCOC_CUI1 ON MRCOC(CUI1);
