@@ -5,8 +5,13 @@ PostgreSQL load script authored and contributed by Steve Bedrick (bedricks@ohsu.
 Please point each 'COPY' statement to your local '/tmp/META' installation directory, or wherever you have stored the .RRF files output by MetamorphoSys. 
 This script has been tested in PostgreSQL 8.2.3 on Mac OS 10.4.10
 
+# The script can also work with PostgreSQL 11.2 and UMLS-2020AB by Zhao Zhengyang (tsingcheng1327@live.cn)
+Thank you for Mr Banda and Mr Bedrick!
+Please point each 'COPY' statement to your local '/tmp/META' installation directory, or wherever you have stored the .RRF files output by MetamorphoSys. 
+This script has been tested in PostgreSQL 11.2 on Linux (Deepin 20.1, Debain 10 cored).
 
 */
+
 create schema if not exists _2020ab;
 set schema '_2020ab';
 
@@ -419,5 +424,5 @@ CREATE TABLE MERGEDLUI (
 	LUI	char(12),
 	dummy char(1)
 );
-COPY MERGEDLUI FROM '/media/yuebing/new_dev/umls/2020AB/META/META/CHANGE/MERGEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+COPY MERGEDLUI FROM '/media/yuebing/new_dev/umls/2020AB/META/CHANGE/MERGEDLUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MERGEDLUI DROP COLUMN dummy;
