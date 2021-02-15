@@ -2,13 +2,17 @@
 	Created by: 
 	Yeb Havinga, MSc
 	yhavinga@gmail.com
+
 	Modified by:
 	Juan M. Banda 
 	juan@jmbanda.com
+
+	Tested by:
 	Zhao Zhengyang
 	tsingcheng1327@live.cn
 */
 
+--- I deleted the expression where tables does not exist in this version. ---
 
 CREATE INDEX X_MRCONSO_CUI ON MRCONSO(CUI);
 ALTER TABLE MRCONSO ADD CONSTRAINT X_MRCONSO_PK PRIMARY KEY (AUI);

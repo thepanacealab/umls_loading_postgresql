@@ -7,12 +7,11 @@ This script has been tested in PostgreSQL 8.2.3 on Mac OS 10.4.10
 
 # The script can also work with PostgreSQL 11.2 and UMLS-2020AB by Zhao Zhengyang (tsingcheng1327@live.cn)
 Thank you for Mr Banda and Mr Bedrick!
-Please point each 'COPY' statement to your local '/tmp/META' installation directory, or wherever you have stored the .RRF files output by MetamorphoSys. 
 This script has been tested in PostgreSQL 11.2 on Linux (Deepin 20.1, Debain 10 cored).
 
 */
 
-create schema if not exists _2020ab;
+create schema if not exists _2020ab; /* You can change the schema name as your wish. */
 set schema '_2020ab';
 
 DROP TABLE if exists MRCOLS;
@@ -28,6 +27,7 @@ CREATE TABLE MRCOLS (
 	dummy char(1)
 );
 
+---change the path of RRF file according the practice---
 COPY MRCOLS FROM '/media/yuebing/new_dev/umls/2020AB/META/MRCOLS.RRF' 
 WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRCOLS DROP COLUMN dummy;
@@ -351,6 +351,22 @@ CREATE TABLE MRXW_ENG (
 COPY MRXW_ENG FROM '/media/yuebing/new_dev/umls/2020AB/META/MRXW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRXW_ENG DROP COLUMN dummy;
 
+/*  Because I only use English items, I deleted the load of MRXW_XXX loaders except English one.
+	If you want to load another language, you can rewrite the SQL expression as follows:
+
+	DROP TABLE if exists MRXW_LAN; ---'LAN' means the language.---
+	CREATE TABLE MRXW_ENG (
+		LAT	char(3) NOT NULL,
+		WD	varchar(100) NOT NULL,
+		CUI	char(12) NOT NULL,
+		LUI	char(12) NOT NULL,
+		SUI	char(12) NOT NULL,
+		dummy char(1)
+	);
+	COPY MRXW_LAN FROM '/your/path/META/MRXW_ENG.RRF' WITH DELIMITER AS '|' NULL AS '';
+	ALTER TABLE MRXW_LAN DROP COLUMN dummy;
+ */
+
 DROP TABLE if exists MRAUI;
 CREATE TABLE MRAUI (
 	AUI1	varchar(9) NOT NULL,
@@ -364,7 +380,7 @@ CREATE TABLE MRAUI (
 	MAPIN	char(1) NOT NULL,
 	dummy char(1)
 );
-COPY MRAUI FROM '/media/yuebing/new_dev/umls/2020AB/META//MRAUI.RRF' WITH DELIMITER AS '|' NULL AS '';
+COPY MRAUI FROM '/media/yuebing/new_dev/umls/2020AB/META/MRAUI.RRF' WITH DELIMITER AS '|' NULL AS '';
 ALTER TABLE MRAUI DROP COLUMN dummy;
 
 
